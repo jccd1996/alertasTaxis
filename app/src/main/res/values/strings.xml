@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">alertasTaxis</string>
+    <string name="label_select_device">Selecciona un dispositivo:</string>
+    <string name="active_bluetooth">Habilita la conexión bluetooth</string>
+</resources>
