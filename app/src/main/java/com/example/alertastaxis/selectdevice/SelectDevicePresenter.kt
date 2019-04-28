@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alertastaxis.R
+import com.example.alertastaxis.db.model.Device
 import com.example.alertastaxis.selectdevice.ui.AdapterSelectDevice
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder

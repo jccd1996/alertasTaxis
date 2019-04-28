@@ -1,7 +1,7 @@
 package com.example.alertastaxis.selectdevice.ui
 
 import com.example.alertastaxis.R
-import com.example.alertastaxis.selectdevice.Device
+import com.example.alertastaxis.db.model.Device
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.item_device.view.*
