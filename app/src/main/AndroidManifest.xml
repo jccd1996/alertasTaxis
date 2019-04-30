@@ -14,9 +14,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".main.ui.MainActivity">
+        <activity
+                android:name=".selectdevice.ui.SelectDevice"
+        >
         </activity>
-        <activity android:name=".selectdevice.ui.SelectDevice">
+        <activity
+                android:name=".main.ui.MainActivity"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
