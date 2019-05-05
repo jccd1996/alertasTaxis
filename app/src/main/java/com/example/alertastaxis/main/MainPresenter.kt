@@ -21,6 +21,7 @@ class MainPresenter(private var view: IMainMVP.view) : IMainMVP.presenter {
     private lateinit var bluetoothIn: Handler
     val handlerState = 0
     private val DataStringIN = StringBuilder()
+    private lateinit var connect:ConnectDevice
 
     override fun validateSelectDevice() {
         val deviceId = sessionManager.getDeviceId()
@@ -33,13 +34,17 @@ class MainPresenter(private var view: IMainMVP.view) : IMainMVP.presenter {
 
     override fun clearData() {
         sessionManager.returnSelectDevice()
+        connect.closeSession()
     }
+
     override fun connectDevicePresenter() {
         if (!doLogOut){
             readData()
-
-            ConnectDevice(view.getContext(),isConnected,btSocket,btAdapter,sessionManager.getDeviceId(),bluetoothIn,
-                handlerState).execute()
+            connect = ConnectDevice(view.getContext(),isConnected,btSocket,btAdapter,sessionManager.getDeviceId(),bluetoothIn,
+                handlerState,view)
+            if(sessionManager.getDeviceId()!=""){
+                connect.execute()
+            }
         }
     }
 

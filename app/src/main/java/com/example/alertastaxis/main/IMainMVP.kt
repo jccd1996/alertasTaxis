@@ -8,6 +8,7 @@ interface IMainMVP {
         fun getContext():Context
         fun goToSelectDeviceActivity()
         fun setState(string: String)
+        fun hiddenItems()
     }
 
     interface presenter{

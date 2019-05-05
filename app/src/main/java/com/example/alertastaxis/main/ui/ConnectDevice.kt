@@ -8,13 +8,18 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.util.Log
+import android.widget.Toast
+import com.example.alertastaxis.R
+import com.example.alertastaxis.db.prefs.SessionManager
+import com.example.alertastaxis.main.IMainMVP
 import java.io.IOException
-import java.io.InputStream
 import java.util.*
 
-class ConnectDevice(val context: Context, var isConnect: Boolean, private var btSocket: BluetoothSocket?,
-                    var btAdapter: BluetoothAdapter?, var address:String, var bluetoothIn:Handler,
-                    var handlerState: Int): AsyncTask<Void, Void, String>(){
+class ConnectDevice(
+    val context: Context, var isConnect: Boolean, private var btSocket: BluetoothSocket?,
+    var btAdapter: BluetoothAdapter?, var address: String, var bluetoothIn: Handler,
+    var handlerState: Int,var viewHidden:IMainMVP.view
+) : AsyncTask<Void, Void, String>() {
 
     private val BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
     private var connectSuccess = true
@@ -24,7 +29,11 @@ class ConnectDevice(val context: Context, var isConnect: Boolean, private var bt
 
     override fun onPreExecute() {
         super.onPreExecute()
-        m_progress = ProgressDialog.show(context, "Connecting...", "please wait")
+        if (SessionManager(context).getDeviceId() != "") {
+            btSocket?.close()
+        }
+        m_progress = ProgressDialog.show(context, context.getString(R.string.connected),
+            context.getString(R.string.wait_moment))
     }
 
     override fun doInBackground(vararg params: Void?): String {
@@ -35,7 +44,7 @@ class ConnectDevice(val context: Context, var isConnect: Boolean, private var bt
                 btSocket = device.createInsecureRfcommSocketToServiceRecord(BTMODULEUUID)
                 BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
                 btSocket!!.connect()
-                MyConexionBT = ConnectedThread(btSocket!!,bluetoothIn,handlerState)
+                MyConexionBT = ConnectedThread(btSocket!!, bluetoothIn, handlerState)
                 MyConexionBT?.start()
             }
         } catch (e: IOException) {
@@ -48,12 +57,17 @@ class ConnectDevice(val context: Context, var isConnect: Boolean, private var bt
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
         if (!connectSuccess) {
-            Log.i("data", "couldn't connect")
+            Toast.makeText(context, R.string.cant_connect, Toast.LENGTH_SHORT).show()
+            viewHidden.hiddenItems()
         } else {
             isConnect = true
-            Log.d("CONECTADO : ", address)
+            Toast.makeText(context, R.string.succesfull_connect, Toast.LENGTH_SHORT).show()
         }
         m_progress.dismiss()
+    }
+
+    fun closeSession() {
+        btSocket?.close()
     }
 }
 

@@ -10,9 +10,9 @@ interface ISelectDeviceMVP {
         fun getActivity(): Activity
         fun goToMainActivity()
     }
+
     interface presenter{
         fun paredDevice()
         fun verifiyState()
     }
-
 }
