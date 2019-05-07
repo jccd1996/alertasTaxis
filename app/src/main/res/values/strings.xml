@@ -2,4 +2,17 @@
     <string name="app_name">alertasTaxis</string>
     <string name="label_select_device">Selecciona un dispositivo:</string>
     <string name="active_bluetooth">Habilita la conexión bluetooth</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="return_select_device">Volver</string>
+    <string name="alert">Alerta</string>
+    <string name="disabled">DESACTIVADO</string>
+    <string name="license">Licencia</string>
+    <string name="hint_lab_to_send">Nombre a enviar:</string>
+    <string name="finish_alert">Terminar alerta</string>
+    <string name="cant_connect">No se pudo establecer conexión con el dispositivo</string>
+    <string name="succesfull_connect">Conexión exitosa</string>
+    <string name="connected">Conectando....</string>
+    <string name="wait_moment">Espera un momento</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alertastaxis.R
 import com.example.alertastaxis.db.model.Device
+import com.example.alertastaxis.db.prefs.SessionManager
 import com.example.alertastaxis.selectdevice.ui.AdapterSelectDevice
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -36,6 +37,12 @@ class SelectDevicePresenter(private var view: ISelectDeviceMVP.view) : ISelectDe
                 val activeDevice = Device(device.name, device.address)
                 adapter.add(AdapterSelectDevice(activeDevice))
             }
+        }
+        adapter.setOnItemClickListener { item, _ ->
+            val deviceItem = item as AdapterSelectDevice
+            val deviceSelected = deviceItem.device
+            SessionManager(view.getActivity()).saveDevice(deviceSelected)
+            view.goToMainActivity()
         }
         view.getRecyclerView().adapter = adapter
     }
